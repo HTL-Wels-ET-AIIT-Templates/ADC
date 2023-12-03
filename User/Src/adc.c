@@ -44,16 +44,22 @@ float adcPotiVoltage(void){
 	float voltage;
 
 	ADC_ChannelConfTypeDef adc1Ch5;
-	// TODO: Set up ADC1 - channel 5
+	adc1Ch5.Channel = ADC_CHANNEL_5;
+	adc1Ch5.Rank = 1; // set rank to 1
+	adc1Ch5.SamplingTime = ADC_SAMPLETIME_144CYCLES; // set sampling time to 144 clock cycles
+	HAL_ADC_ConfigChannel(&adc1Handle, &adc1Ch5); // select channel_5 for ADC1
 
-	// TODO: start ADC measurement
+	// TODO: start ADC measurement: HAL_ADC_Start()
 
 
 	// wait until conversion is finished
 	// (could be done with interrupt - would require different configuration)
-	while(HAL_ADC_PollForConversion(&adc1Handle, 5) == HAL_BUSY);
+	if (HAL_ADC_PollForConversion(&adc1Handle, 5) == HAL_TIMEOUT) {
+		// Error
+		return -1.0;
+	}
 
-	// TODO: get measurement result, calculate voltage value
+	// TODO: get measurement result, calculate voltage value: HAL_ADC_GetValue()
 
 	return voltage;
 }
