@@ -184,7 +184,7 @@ static void AdcInit(void) {
  * @param data3 Data points of signal 3
  * @param nrOfData size of data arrays
  */
-void PlotData (int nrMData, float* data1, float* data2, float* data3,
+void plotData (int nrMData, float* data1, float* data2, float* data3,
 		int nrOfData) {
 
 	int i;
